@@ -23,11 +23,9 @@ app.post("/api/notes", function (req, res){
 
 
 app.delete(`/api/notes/:id`, function (req, res){
-    console.log(req.params);
-// remove note with id in req.params.id from noteData
 for(var i = 0; i < noteData.length; i++) {
-    if(data[i].id == noteData.id) {
-        noteData.id.splice(i, 1);
+    if(noteData[i].id == req.params.id) {
+        noteData.splice(i, 1);
         break;
     }
 }
@@ -38,5 +36,7 @@ for(var i = 0; i < noteData.length; i++) {
 }
 
 function updateDb() {
-    fs.writeFile("..db/db");
-};
+    fs.writeFile("db/db.json",JSON.stringify(noteData,'\t'),err => {
+        if (err) throw err;
+        return true;
+  })};
