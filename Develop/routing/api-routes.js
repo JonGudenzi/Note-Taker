@@ -9,9 +9,10 @@ module.exports = function(app) {
         res.json(noteData);
     });
 
-app.post("/api/notes",function (req, res){
+app.post("/api/notes", function (req, res){
     console.log(req.body);
-    res.sendStatus(201);
+    var newNote = req.body;
+    res.json(newNote);
 })
 
 }
