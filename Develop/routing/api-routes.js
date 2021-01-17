@@ -12,15 +12,12 @@ module.exports = function(app) {
     });
 
 app.post("/api/notes", function (req, res){
-    // console.log(req.body);
     var newNote = req.body;
-    // console.log(newNote);
     newNote.id = uuidv4();
-    // console.log(newNote);
     noteData.push(newNote);
     res.json(newNote);
+    updateDb();
 });
-
 
 app.delete(`/api/notes/:id`, function (req, res){
 for(var i = 0; i < noteData.length; i++) {
@@ -32,7 +29,6 @@ for(var i = 0; i < noteData.length; i++) {
     updateDb();
     res.json(noteData);
 });
-
 }
 
 function updateDb() {
